@@ -1,8 +1,9 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView, LogoutView
-from users.views import RegisterView
+
+from orders.views import OrderView, CreateOrderProductView
 
 
 urlpatterns = [
-    # path('add/', LoginView.as_view(template_name="users.html"), name='login'),
+    path('detail/', OrderView.as_view(), name='orders.detail'),
+    path('add/', CreateOrderProductView.as_view(), name='orders.add'),
 ]
