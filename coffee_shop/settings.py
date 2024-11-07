@@ -12,10 +12,17 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+from environ import Env
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Enviroment variables
+env = Env()
+Env.read_env(
+    os.path.join(BASE_DIR, '.env'),
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -84,12 +91,12 @@ WSGI_APPLICATION = 'coffee_shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'coffee_shop',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'USER': 'app_user',
-        'PASSWORD': 'Edward',
+        'ENGINE': env.str('DB_ENGINE'),
+        'NAME': env.str('DB_NAME'),
+        'HOST': env.str('DB_HOST'),
+        'PORT': env.str('DB_PORT'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD')
     }
 }
 
